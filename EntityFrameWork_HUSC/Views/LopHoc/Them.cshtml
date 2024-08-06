@@ -3,7 +3,13 @@
 @{
     ViewData["Title"] = "Them";
 }
-
+@if (@ViewBag.Message != null)
+{
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        @ViewBag.Message
+    </div>
+}
 <h1>Them</h1>
 
 <h4>LopHoc</h4>
@@ -36,3 +42,28 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<style>
+    .alert {
+        padding: 20px;
+        background-color: #f44336; /* Red */
+        color: white;
+        margin-bottom: 15px;
+    }
+
+    /* The close button */
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        /* When moving the mouse over the close button */
+        .closebtn:hover {
+            color: black;
+        }
+</style>

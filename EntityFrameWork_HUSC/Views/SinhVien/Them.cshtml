@@ -4,10 +4,16 @@
     ViewData["Title"] = "Them";
 }
 
-<h1>Them</h1>
-
-<h4>SinhVien</h4>
+<h1>Them sinh viên</h1>
 <hr />
+
+@if(@ViewBag.Message != null)
+{
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        @ViewBag.Message
+    </div>
+}
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Them">
@@ -46,7 +52,7 @@
                 <select asp-for="MaLopHoc" class ="form-control" asp-items="ViewBag.MaLopHoc"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Thêm" class="btn btn-primary mt-2" />
             </div>
         </form>
     </div>
@@ -59,3 +65,28 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<style>
+    .alert {
+        padding: 20px;
+        background-color: #f44336; /* Red */
+        color: white;
+        margin-bottom: 15px;
+    }
+
+    /* The close button */
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        /* When moving the mouse over the close button */
+        .closebtn:hover {
+            color: black;
+        }
+</style>

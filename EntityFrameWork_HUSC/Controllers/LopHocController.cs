@@ -42,7 +42,11 @@ namespace EntityFrameWork_HUSC.Controllers
 
         public IActionResult Xoa(int id)
         {
-            lopHocService.Delete(id);
+            var lh = lopHocService.Delete(id);
+            if (lh)
+            {
+                TempData["Message"] = "Xóa lớp học thành công !";
+            }
             return RedirectToAction("Index");
         }
         public IActionResult Them()
@@ -54,7 +58,13 @@ namespace EntityFrameWork_HUSC.Controllers
         [HttpPost]
         public IActionResult Them(LopHoc model)
         {
-            lopHocService.Insert(model);
+            var lh = lopHocService.Insert(model);
+            if (!lh)
+            {
+                ViewBag.Message = "Đã tồn tại lớp học này !";
+                return View(model);
+            }
+            TempData["Message"] = "Thêm lớp học thành công !";
             return RedirectToAction("Index");
         }
 
@@ -67,8 +77,13 @@ namespace EntityFrameWork_HUSC.Controllers
         [HttpPost]
         public IActionResult Sua(int id, LopHoc model)
          {
-             lopHocService.Update(id, model);
-             return RedirectToAction("Index");
+             var lh = lopHocService.Update(id, model);
+            if (lh)
+            {
+                TempData["Message"] = "Chỉnh sửa lớp học thành công !";
+            }
+            
+            return RedirectToAction("Index");
          }
     }
 }
