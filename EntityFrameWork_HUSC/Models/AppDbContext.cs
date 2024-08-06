@@ -10,7 +10,7 @@ namespace EntityFrameWork_HUSC.Models
         public DbSet<SinhVien> SinhViens { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string conString = "Server=DESKTOP-OKEUGVN\\SQLEXPRESS;Database=QL_Class;User Id=sa;Password=123;TrustServerCertificate=True;";
+            string conString = "Server=DESKTOP-OKEUGVN\\SQLEXPRESS;Database=QLLopHoc;User Id=sa;Password=123;TrustServerCertificate=True;";
             optionsBuilder.UseSqlServer(conString);
         }
 
