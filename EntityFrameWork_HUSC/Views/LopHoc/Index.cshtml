@@ -1,0 +1,67 @@
+﻿@model EntityFrameWork_HUSC.ViewModels.LopHocViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Danh sách lớp học</h1>
+<form asp-action="TimKiem" asp-controller="LopHoc">
+    <div class="mb-3 col-7" style="display: inline-flex">
+        <input type="search" class="form-control" id="exampleInputEmail1" name="ten" value="@TempData["Ten"]" placeholder="Tìm kiếm...">
+        <button type="submit" class="btn btn-outline-primary ms-lg-2"><i class="bi bi-search"></i></button>
+    </div>
+
+</form>
+<p>
+    <a asp-action="Them" class="btn btn-outline-primary">Thêm mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tên lớp học
+            </th>
+            <th>
+                Phòng học
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listLopHoc)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenLopHoc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhongHoc)
+                </td>
+                <!-- Modal -->
+                <div class="modal fade" id="delete_@item.MaLopHoc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Bạn có chắc muốn xóa @item.TenLopHoc không ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bỏ qua</button>
+                                <a asp-action="Xoa" asp-route-id="@item.MaLopHoc" class="btn btn-primary">Đồng ý</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <td>
+                    <a class="btn btn-outline-success" asp-action="Index" asp-controller="SinhVien" asp-route-malop="@item.MaLopHoc">Danh sách sinh viên</a> |
+                    <a class="btn btn-outline-success" asp-action="Sua" asp-route-id="@item.MaLopHoc">Edit</a> |
+                    @* <a class="btn btn-primary" asp-action="ChiTiet" asp-route-id="@item.MaLopHoc">Details</a> | *@
+                    <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete_@item.MaLopHoc">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,90 @@
+﻿@model EntityFrameWork_HUSC.ViewModels.SinhVienViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Danh sách sinh viên</h1>
+<form asp-action="TimKiem" asp-controller="SinhVien">
+    <div class="mb-3 col-7" style="display: inline-flex">
+        <input type="search" class="form-control" id="exampleInputEmail1" name="ten" value="@TempData["Ten"]" placeholder="Tìm kiếm masv, ho, ten...">
+        <button type="submit" class="btn btn-outline-primary ms-lg-2"><i class="bi bi-search"></i></button>
+    </div>
+
+</form>
+<p>
+    <a asp-action="Them" class="btn btn-outline-primary">Thêm mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Mã sinh viên
+            </th>
+            <th>
+                Họ
+            </th>
+            <th>
+                Tên
+            </th>
+            <th>
+                Ngày Sinh
+            </th>
+            <th>
+                Giới tính
+            </th>
+            <th>
+                Mã lớp học
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listSinhVien)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSinhVien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ho)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgaySinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GioiTinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaLopHoc)
+                </td>
+                <!-- Modal -->
+                <div class="modal fade" id="delete_@item.MaSinhVien" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Bạn có chắc muốn xóa @item.Ten không ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bỏ qua</button>
+                                <a asp-action="Xoa" asp-route-id="@item.id" class="btn btn-primary">Đồng ý</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <td>
+                    <a class="btn btn-outline-success" asp-action="Sua" asp-route-id="@item.MaSinhVien">Edit</a> |
+                    @* <a class="btn btn-primary" asp-action="ChiTiet" asp-route-id="@item.MaLopHoc">Details</a> | *@
+                    <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete_@item.MaSinhVien">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

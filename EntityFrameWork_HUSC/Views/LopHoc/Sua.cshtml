@@ -1,0 +1,38 @@
+﻿@model EntityFrameWork_HUSC.Models.LopHoc
+
+@{
+    ViewData["Title"] = "Sua";
+}
+
+<h1>Sua</h1>
+
+<h4>LopHoc</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Sua" asp-controller="LopHoc" method="post" asp-route-id="@Model.MaLopHoc">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TenLopHoc" class="control-label"></label>
+                <input asp-for="TenLopHoc" class="form-control" value="@Model.TenLopHoc" />
+                <span asp-validation-for="TenLopHoc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhongHoc" class="control-label"></label>
+                <input asp-for="PhongHoc" class="form-control" value="@Model.PhongHoc" />
+                <span asp-validation-for="PhongHoc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" value="Save" class="btn btn-outline-primary mt-2">Sửa</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
